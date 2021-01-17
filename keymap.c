@@ -58,11 +58,6 @@ enum planck_keycodes {
   ADJUST
 };
 
-enum combos {
-    MO_LOWER_CB,
-    MO_RAISE_CB
-};
-
 // Adding macros to make the keymaps below much easier to read.
 
 #define GUIMINS GUI_T(KC_MINS)
@@ -91,12 +86,41 @@ enum combos {
 #define OSMALT OSM(MOD_LALT)
 #define RAIGRV LT(_RAISE, KC_GRV)
 #define RAIPIP LT(_RAISE, KC_PIPE)
-
 #define SFTLBRC SFT_T(KC_LBRC)
+#define GUIO GUI_T(KC_O)
+#define GUIN GUI_T(KC_N)
 
 #define T_DVORAK TO(_DVORAK)
 #define T_LOWER TO(_LOWER)
 #define T_RAISE TO(_RAISE)
+
+enum combos {
+    TK__LS_CB,
+    KPA__CB
+};
+
+const uint16_t PROGMEM tk_ls[] = {KC_O, KC_COMM, KC_R, KC_S, COMBO_END};
+const uint16_t PROGMEM kpa[] = {KC_O, KC_DOT, KC_ESC, COMBO_END};
+combo_t key_combos[COMBO_COUNT] = {
+    [TK__LS_CB] = COMBO_ACTION(tk_ls),
+    [KPA__CB] = COMBO_ACTION(kpa)
+};
+
+static bool kpa_active = false;
+void process_combo_event(uint16_t combo_index, bool pressed) {
+    if (!pressed) {
+        return;
+    }
+    switch(combo_index) {
+    case TK__LS_CB:
+        set_oneshot_mods(MOD_BIT(KC_LSFT));
+        break;
+    case KPA__CB:
+        kpa_active = !kpa_active;
+        tap_code(KC_CAPS);
+        break;
+    }
+}
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   /* Dvorak Layer
@@ -111,7 +135,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 	`-----------------------------------------'`-----------------------------------------' */
   [_DVORAK] = LAYOUT(
     KC_QUOT, KC_COMM, KC_DOT,  KC_P,    KC_Y,                      KC_F,     KC_G,    KC_C,    KC_R,     KC_V,
-    CTLA,    KC_O,    LOWE,    SFT_U,    KC_I,                      KC_D,     SFT_H,    LOWT,    KC_N,    CTLS,
+    CTLA,    KC_O,    LOWE,    SFT_U,    KC_I,                      KC_D,     SFT_H,    LOWT,    KC_N,    KC_S,
     ALTSCLN, KC_Q,    KC_J,    KC_K,    KC_X,   RAIGRV,  RAIPIP,   KC_B,     KC_L,    KC_M,    KC_W,     ALT_T(KC_Z),
     RESET  ,  OSMCTL,  OSMALT,  GUIMINS, KC_ESC, SFTTAB, SFTENTER, KC_SPC,   GUISLSH, OSMSFT, OSMGUI,  TO(_ADJUST)
   ),
@@ -184,11 +208,17 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     key_timer = timer_read();
 #endif
   switch (keycode) {
-    case DVORAK:
+  case DVORAK:
       if (record->event.pressed) {
         set_single_persistent_default_layer(_DVORAK);
       }
       return false;
+  case KC_SPC:
+      if (kpa_active && record->event.pressed) {
+          kpa_active = false;
+          tap_code(KC_CAPS);
+          return true;
+      }
   }
   return true;
 }
