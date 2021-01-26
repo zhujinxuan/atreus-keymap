@@ -19,6 +19,8 @@
 // Preonic keyboards by Jack Humbert.
 
 #include QMK_KEYBOARD_H
+#include "keycodes/dual.h"
+#include "keycodes/combo.h"
 
 bool get_permissive_hold(uint16_t keycode, keyrecord_t *record) {
     if (record->event.key.row == 3) {
@@ -44,105 +46,27 @@ bool get_ignore_mod_tap_interrupt(uint16_t keycode, keyrecord_t *record) {
 
 // Initial keymap for Xyverz's Keyboardio Atreus
 
-enum layer_names {
-  _DVORAK,
-  _LOWER,
-  _RAISE,
-  _ADJUST
-};
-
-enum planck_keycodes {
-  DVORAK = SAFE_RANGE,
-  LOWER,
-  RAISE,
-  ADJUST
-};
-
-// Adding macros to make the keymaps below much easier to read.
-
-#define GUIMINS GUI_T(KC_MINS)
-#define GUISLSH GUI_T(KC_SLSH)
-#define SFTESC SFT_T(KC_ESC)
-
-#define OSMGUI OSM(MOD_LGUI)
-#define OSMCTL OSM(MOD_LCTL)
-#define OSMSFT OSM(MOD_LSFT)
-#define OSMALT OSM(MOD_LALT)
-
-/* Home row */
-#define LOWT LT(_LOWER, KC_T)
-#define LOWE LT(_LOWER, KC_E)
-#define SFT_U SFT_T(KC_U)
-#define SFT_H SFT_T(KC_H)
-#define CTLA   CTL_T(KC_A)
-#define CTLS   CTL_T(KC_S)
-
-// Other row.
-#define ALTSCLN ALT_T(KC_SCLN)
-
-#define SFTTAB LT(_LOWER, KC_TAB)
-#define SFTENTER LT(_LOWER, KC_ENTER)
-#define SFTSPC SFT_T(KC_SPC)
-#define OSMALT OSM(MOD_LALT)
-#define RAIGRV LT(_RAISE, KC_GRV)
-#define RAIPIP LT(_RAISE, KC_PIPE)
-#define SFTLBRC SFT_T(KC_LBRC)
-#define GUIO GUI_T(KC_O)
-#define GUIN GUI_T(KC_N)
-
-#define T_DVORAK TO(_DVORAK)
-#define T_LOWER TO(_LOWER)
-#define T_RAISE TO(_RAISE)
-
-enum combos {
-    TK__LS_CB,
-    KPA__CB
-};
-
-const uint16_t PROGMEM tk_ls[] = {KC_O, KC_COMM, KC_R, KC_S, COMBO_END};
-const uint16_t PROGMEM kpa[] = {KC_O, KC_DOT, KC_ESC, COMBO_END};
-combo_t key_combos[COMBO_COUNT] = {
-    [TK__LS_CB] = COMBO_ACTION(tk_ls),
-    [KPA__CB] = COMBO_ACTION(kpa)
-};
-
-static bool kpa_active = false;
-void process_combo_event(uint16_t combo_index, bool pressed) {
-    if (!pressed) {
-        return;
-    }
-    switch(combo_index) {
-    case TK__LS_CB:
-        set_oneshot_mods(MOD_BIT(KC_LSFT));
-        break;
-    case KPA__CB:
-        kpa_active = !kpa_active;
-        tap_code(KC_CAPS);
-        break;
-    }
-}
-
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   /* Dvorak Layer
 	,----------------------------------.              ,----------------------------------.
 	|   '  |   ,  |   .  |   P  |   Y  |              |   F  |   G  |   C  |   R  |   V  |
 	|------+------+------+------+------|              |------+------+------+------+------|
-	| CTL/A|   O  |   E  |   U  |   I  |              |   D  |   H  |   T  |   N  | CTL/S|
+	|   A  |   O  |   E  |   U  |   I  |              |   D  |   H  |   T  |   N  | CTL/S|
 	|------+------+------+------+------+------.,------+------+------+------+------+------|
-	| ALT/;|   Q  |   J  |   K  |   X  | RAI/`|| RAI/\|   B  |   L  |   M  |   W  | ALT/Z|
+	|  ;   |   Q  |   J  |   K  |   X  | RAI/`|| RAI/\|   B  |   L  |   M  |   W  | ALT/Z|
 	|------+------+------+------+------+------||------+------+------+------+------+------|
-	|RESET |  CTL |  ALT | GUI/-|  ESC | TAB  || ENTER|  Spc | GUI//| SFT  | GUI  |Adjust|
+	|RESET |  CTL |  ALT |   -  |  ESC | TAB  || ENTER|  Spc |  /   | SFT  | GUI  |Adjust|
 	`-----------------------------------------'`-----------------------------------------' */
   [_DVORAK] = LAYOUT(
     KC_QUOT, KC_COMM, KC_DOT,  KC_P,    KC_Y,                      KC_F,     KC_G,    KC_C,    KC_R,     KC_V,
-    CTLA,    KC_O,    LOWE,    SFT_U,    KC_I,                      KC_D,     SFT_H,    LOWT,    KC_N,    KC_S,
-    ALTSCLN, KC_Q,    KC_J,    KC_K,    KC_X,   RAIGRV,  RAIPIP,   KC_B,     KC_L,    KC_M,    KC_W,     ALT_T(KC_Z),
-    RESET  ,  OSMCTL,  OSMALT,  GUIMINS, KC_ESC, SFTTAB, SFTENTER, KC_SPC,   GUISLSH, OSMSFT, OSMGUI,  TO(_ADJUST)
+    CTLA,    KC_O,    LOWE,    KC_U,    KC_I,                      KC_D,    KC_H,    LOWT,    KC_N,     KC_S,
+    KC_SCLN, KC_Q,    KC_J,    KC_K,    KC_X,   RAIGRV,  RAIPIP,   KC_B,     KC_L,    KC_M,    KC_W,     KC_Z,
+    RESET  ,  OSMCTL,  OSMALT, GUI_T(KC_TAB), SFT_T(KC_ESC), KC_MINS, KC_SLSH, SFT_T(KC_SPC),   KC_ENTER, OSMSFT, OSMGUI,  TO(_ADJUST)
   ),
 
   /* LOWER Layer
 	,----------------------------------.              ,----------------------------------.
-	|   !  |   @  |   #  |   $  |   %  |              |   =  |  7   |   8  |   9  | ALT  |
+	|   !  |   @  |   #  |   $  |   %  |              |   =  |  7   |   8  |   9  | *    |
 	|------+------+------+------+------|              |------+------+------+------+------|
 	|   ^  | Left |  UP  | Right|   &  |              |   +  |  4   |   5  |   6  | BKSP |
 	|------+------+------+------+------+------.,------+------+------+------+------+------|
@@ -151,10 +75,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 	|      |      |      |   (  | [    | CTL  ||  ALT | SFT  | GUI  |   .  |   0  |      |
 	`-----------------------------------------'`-----------------------------------------'*/
   [_LOWER] = LAYOUT(
-    KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC,                   KC_EQL,  KC_7, KC_8, KC_9, OSMALT,
-    KC_CIRC, KC_LEFT, KC_UP,   KC_RGHT, KC_AMPR,                   KC_PLUS, KC_4, KC_5, KC_6, KC_BSPC,
-    KC_COPY, KC_PASTE,KC_DOWN, KC_RPRN, KC_RBRC, KC_ASTR, KC_ASTR, KC_DQT,  KC_1, KC_2, KC_3, KC_F12,
-    RESET  , _______, _______, KC_LPRN, KC_LBRC,  OSMCTL,  OSMALT, OSMSFT,OSMGUI,KC_DOT,KC_0, TO(_ADJUST)
+    KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC,                   KC_EQL,  KC_7, KC_8, KC_9, KC_ASTR,
+    KC_CIRC, KC_LEFT, KC_UP,   KC_RGHT, KC_AMPR,                   KC_0, KC_4, KC_5, KC_6, KC_BSPC,
+    KC_COPY, KC_PASTE,KC_DOWN, KC_RPRN, KC_RBRC, KC_ASTR, KC_ASTR, MC_REG,  KC_1, KC_2, KC_3, KC_F12,
+    RESET  , _______, _______, OSMCTL, OSMALT,  OSMCTL,  OSMALT, OSMSFT,OSMGUI,KC_DOT,KC_0, TO(_ADJUST)
   ),
 
   /* RAISE Layer
@@ -207,18 +131,14 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     }
     key_timer = timer_read();
 #endif
+  if (record->event.key.row == 3) {
+      capOff();
+  }
   switch (keycode) {
-  case DVORAK:
-      if (record->event.pressed) {
-        set_single_persistent_default_layer(_DVORAK);
-      }
+  case MC_REG:
+      SEND_STRING("\"+");
       return false;
-  case KC_SPC:
-      if (kpa_active && record->event.pressed) {
-          kpa_active = false;
-          tap_code(KC_CAPS);
-          return true;
-      }
+      break;
   }
   return true;
 }
