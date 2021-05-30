@@ -4,9 +4,6 @@ enum combos {
     TK__LS_CB,
     KAPSLOCK,
     SFT_CB,
-    CTL_CB,
-    GUI_CB,
-    ALT_CB,
     LPR_CB,
     RPR_CB,
     LBR_CB,
@@ -17,16 +14,19 @@ enum combos {
     TILD_CB,
     BSLASH_CB,
     PIPE_CB,
+    QUES_CB,
+    SLASH_CB,
+    MINS_CB,
+    UNDS_CB,
     LOWER_CB,
     BASE_CB,
+    VPASTE_CB,
+    VYANK_CB,
 };
 
 const uint16_t PROGMEM tk_ls[] = {KC_O, KC_DOT, KC_R, KC_S, COMBO_END};
 const uint16_t PROGMEM kapslock[] = {KC_COMM, KC_DOT, KC_P, COMBO_END};
 const uint16_t PROGMEM sftcb[] = {KC_O, KC_COMM, KC_S, COMBO_END};
-const uint16_t PROGMEM ctlcb[] = {KC_O, KC_COMM, KC_N, COMBO_END};
-const uint16_t PROGMEM guicb[] = {KC_O, KC_COMM, KC_V, COMBO_END};
-const uint16_t PROGMEM altcb[] = {KC_O, KC_COMM, KC_R, COMBO_END};
 const uint16_t PROGMEM lprcb[] = {KC_O, KC_U, KC_G, COMBO_END};
 const uint16_t PROGMEM rprcb[] = {KC_O, KC_U, KC_R, COMBO_END};
 const uint16_t PROGMEM lbrcb[] = {KC_O, KC_U, KC_H, COMBO_END};
@@ -37,16 +37,19 @@ const uint16_t PROGMEM tildcb[] = {KC_O, KC_U, KC_C, COMBO_END};
 const uint16_t PROGMEM grvcb[] = {KC_O, KC_U, KC_V, COMBO_END};
 const uint16_t PROGMEM bslashcb[] = {KC_O, KC_C, KC_N, COMBO_END};
 const uint16_t PROGMEM pipecb[] = {KC_O, KC_R, KC_N, COMBO_END};
+const uint16_t PROGMEM questioncb[] = {KC_O, KC_H, KC_G, COMBO_END};
+const uint16_t PROGMEM slashcb[] = {KC_O, KC_H, KC_C, COMBO_END};
+const uint16_t PROGMEM undscb[] = {KC_O, KC_L, KC_M, COMBO_END};
+const uint16_t PROGMEM minscb[] = {KC_O, KC_G, KC_C, COMBO_END};
 const uint16_t PROGMEM lowercb[] = {KC_O, KC_J, KC_U, COMBO_END};
 const uint16_t PROGMEM basecb[] = {KC_UP, KC_LEFT, KC_RIGHT, COMBO_END};
+const uint16_t PROGMEM vimPasteCB[] = {KC_A, KC_O, KC_P, COMBO_END};
+const uint16_t PROGMEM vimYankCB[] = {KC_A, KC_O, KC_K, COMBO_END};
 
 combo_t key_combos[COMBO_COUNT] = {
     [TK__LS_CB] = COMBO_ACTION(tk_ls),
     [KAPSLOCK] = COMBO_ACTION(kapslock),
     [SFT_CB] = COMBO_ACTION(sftcb),
-    [CTL_CB] = COMBO_ACTION(ctlcb),
-    [GUI_CB] = COMBO_ACTION(guicb),
-    [ALT_CB] = COMBO_ACTION(altcb),
     [LPR_CB] = COMBO(lprcb, KC_LPRN),
     [RPR_CB] = COMBO(rprcb, KC_RPRN),
     [LBR_CB] = COMBO(lbrcb, KC_LBRC),
@@ -57,8 +60,14 @@ combo_t key_combos[COMBO_COUNT] = {
     [TILD_CB] = COMBO(tildcb, KC_TILD),
     [BSLASH_CB] = COMBO(bslashcb, KC_BSLASH),
     [PIPE_CB] = COMBO(pipecb, KC_PIPE),
+    [SLASH_CB] = COMBO(slashcb, KC_SLASH),
+    [QUES_CB] = COMBO(questioncb, KC_QUES),
+    [MINS_CB] = COMBO(minscb, KC_MINS),
+    [UNDS_CB] = COMBO(undscb, KC_UNDS),
     [LOWER_CB] = COMBO_ACTION(lowercb),
-    [BASE_CB] = COMBO_ACTION(basecb)
+    [BASE_CB] = COMBO_ACTION(basecb),
+    [VPASTE_CB] = COMBO_ACTION(vimPasteCB),
+    [VYANK_CB] = COMBO_ACTION(vimYankCB),
 };
 
 static bool kpa_active = false;
@@ -94,24 +103,18 @@ void process_combo_event(uint16_t combo_index, bool pressed) {
         capOff();
         set_oneshot_mods(MOD_BIT(KC_LSFT));
         break;
-    case CTL_CB:
-        capOff();
-        set_oneshot_mods(MOD_BIT(KC_LCTL));
-        break;
-    case GUI_CB:
-        capOff();
-        set_oneshot_mods(MOD_BIT(KC_LGUI));
-        break;
-    case ALT_CB:
-        capOff();
-        set_oneshot_mods(MOD_BIT(KC_LALT));
-        break;
     case LOWER_CB:
         layer_on(_LOWER);
         break;
     case BASE_CB:
         layer_off(_LOWER);
         layer_on(_DVORAK);
+        break;
+    case VPASTE_CB:
+        SEND_STRING("\"+p");
+        break;
+    case VYANK_CB:
+        SEND_STRING("\"+y");
         break;
     }
 }

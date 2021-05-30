@@ -59,9 +59,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 	`-----------------------------------------'`-----------------------------------------' */
   [_DVORAK] = LAYOUT(
     KC_QUOT, KC_COMM, KC_DOT,  KC_P,    KC_Y,                      KC_F,     KC_G,    KC_C,    KC_R,     KC_V,
-    CTLA,    KC_O,    LOWE,    KC_U,    KC_I,                      KC_D,    KC_H,    LOWT,    KC_N,     KC_S,
-    KC_SCLN, KC_Q,    KC_J,    KC_K,    KC_X,   RAIGRV,  RAIPIP,   KC_B,     KC_L,    KC_M,    KC_W,     KC_Z,
-    RESET  ,  OSMCTL,  OSMALT, GUI_T(KC_TAB), SFT_T(KC_ESC), KC_MINS, KC_SLSH, SFT_T(KC_SPC),   ALT_T(KC_ENTER), OSMSFT, OSMGUI,  TO(_ADJUST)
+    KC_A,    KC_O,    LOWE,    KC_U,    KC_I,                      KC_D,    KC_H,    LOWT,    KC_N,     KC_S,
+    KC_SCLN, KC_Q,    KC_J,    KC_K,    KC_X, RAIGRV,  KC_BSPC,   KC_B,     KC_L,    KC_M,    KC_W,     KC_Z,
+    RESET  ,  OSMCTL,  OSMALT, GUI_T(KC_TAB), SFT_T(KC_ESC), OSMSFT, OSMALT, SFT_T(KC_SPC),   CTL_T(KC_ENTER), OSMSFT, OSMGUI,  TO(_ADJUST)
   ),
 
   /* LOWER Layer
@@ -77,8 +77,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_LOWER] = LAYOUT(
     KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC,                   KC_EQL,  KC_7, KC_8, KC_9, KC_ASTR,
     KC_CIRC, KC_LEFT, KC_UP,   KC_RGHT, KC_AMPR,                   KC_0, KC_4, KC_5, KC_6, KC_BSPC,
-    KC_COPY, KC_PASTE,KC_DOWN, KC_RPRN, KC_RBRC, KC_ASTR, KC_ASTR, MC_REG,  KC_1, KC_2, KC_3, KC_F12,
-    RESET  , _______, _______, OSMCTL, OSMALT,  OSMCTL,  OSMALT, OSMSFT,OSMGUI,KC_DOT,KC_0, TO(_ADJUST)
+    KC_COPY, KC_PASTE,KC_DOWN, KC_RPRN, KC_RBRC, KC_ASTR, KC_ASTR, KC_PLUS,  KC_1, KC_2, KC_3, KC_F12,
+    RESET  , _______, _______, OSMGUI, OSMSFT,  OSMCTL,  OSMALT, OSMSFT,OSMCTL,CTL_T(KC_DOT),KC_0, TO(_ADJUST)
   ),
 
   /* RAISE Layer

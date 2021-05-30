@@ -20,7 +20,7 @@
 
 #define IGNORE_MOD_TAP_INTERRUPT_PER_KEY
 #define PERMISSIVE_HOLD_PER_KEY
-#define COMBO_COUNT 18
+#define COMBO_COUNT 21
 #define COMBO_ALLOW_ACTION_KEYS
 
 /* USB Device descriptor parameter */
