@@ -22,6 +22,7 @@
 #define PERMISSIVE_HOLD_PER_KEY
 #define COMBO_COUNT 22
 #define COMBO_ALLOW_ACTION_KEYS
+#define TAPPING_TOGGLE 2
 
 /* USB Device descriptor parameter */
 
