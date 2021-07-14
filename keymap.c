@@ -62,7 +62,7 @@
     KC_QUOT, KC_COMM, KC_DOT,  KC_P,    KC_Y,                      KC_F,     KC_G,    KC_C,    KC_R,     KC_V,
     KC_A,    KC_O,    KC_E,    KC_U,    KC_I,                      KC_D,     KC_H,    LOWT,    KC_N,     KC_S,
     KC_SCLN, KC_Q,    KC_J,    KC_K,    KC_X, RAIGRV,  KC_BSPC,    KC_B,     KC_L,    KC_M,    KC_W,     KC_Z,
-    RESET  ,  OSMCTL,  OSMALT, GUI_T(KC_TAB), SFT_T(KC_ESC), TT(_LOWER), TT(_LOWER), SFT_T(KC_SPC),   CTL_T(KC_ENTER), OSMSFT, OSMGUI,  OSMSFT
+    RESET  ,  OSMCTL,  OSMALT, GUI_T(KC_TAB), SFT_T(KC_ESC), TT(_LOWER), TT(_LOWER), SFT_T(KC_SPC),   CTL_T(KC_ENTER), OSMALT, OSMGUI,  OSMSFT
   ),
 
   /* LOWER Layer
