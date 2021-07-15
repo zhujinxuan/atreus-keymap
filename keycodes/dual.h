@@ -2,10 +2,10 @@
 
 // The layers that we are defining for this keyboards.
 enum layer_names {
-    _DVORAK,
-    _LOWER,
-    _RAISE,
-    _ADJUST
+  _DVORAK,
+  _LOWER,
+  _RAISE,
+  _ADJUST,
 };
 
 // Adding macros to make the keymaps below much easier to read.
@@ -19,12 +19,10 @@ enum layer_names {
 #define OSMALT OSM(MOD_LALT)
 
 /* Home row */
-#define LOWT LT(_LOWER, KC_T)
-#define LOWE LT(_LOWER, KC_E)
 #define SFT_U SFT_T(KC_U)
 #define SFT_H SFT_T(KC_H)
-#define CTLA   CTL_T(KC_A)
-#define CTLS   CTL_T(KC_S)
+#define CTLA CTL_T(KC_A)
+#define CTLS CTL_T(KC_S)
 
 // Other row.
 #define ALTSCLN ALT_T(KC_SCLN)
@@ -43,5 +41,5 @@ enum layer_names {
 
 // SAFE_RANGE must be used to tag the first element of the enum.
 enum custom_keycodes {
-    MC_REG = SAFE_RANGE,
+  MC_REG = SAFE_RANGE,
 };

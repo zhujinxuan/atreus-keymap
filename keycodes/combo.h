@@ -3,7 +3,6 @@
 enum combos {
   TK__LS_CB,
   KAPSLOCK,
-  SFT_CB,
   LPR_CB,
   RPR_CB,
   LBR_CB,
@@ -18,16 +17,20 @@ enum combos {
   SLASH_CB,
   MINS_CB,
   UNDS_CB,
-  LOWER_CB,
   BASE_CB,
   VPASTE_CB,
   VYANK_CB,
   ALT_BACK_CB,
+  SHOW_TERMINAL_CB,
+  STAR_CB,
+  EQL_CB,
+  PLS_CB,
+  ONLOW_CB,
+  ONLOWR_CB
 };
 
 const uint16_t PROGMEM tk_ls[] = {KC_O, KC_DOT, KC_R, KC_S, COMBO_END};
 const uint16_t PROGMEM kapslock[] = {KC_COMM, KC_DOT, KC_P, COMBO_END};
-const uint16_t PROGMEM sftcb[] = {KC_O, KC_COMM, KC_S, COMBO_END};
 const uint16_t PROGMEM lprcb[] = {KC_O, KC_U, KC_G, COMBO_END};
 const uint16_t PROGMEM rprcb[] = {KC_O, KC_U, KC_R, COMBO_END};
 const uint16_t PROGMEM lbrcb[] = {KC_O, KC_U, KC_H, COMBO_END};
@@ -47,11 +50,16 @@ const uint16_t PROGMEM basecb[] = {KC_UP, KC_LEFT, KC_RIGHT, COMBO_END};
 const uint16_t PROGMEM vimPasteCB[] = {KC_A, KC_O, KC_P, COMBO_END};
 const uint16_t PROGMEM vimYankCB[] = {KC_A, KC_O, KC_K, COMBO_END};
 const uint16_t PROGMEM altBackCB[] = {KC_COMM, KC_O, KC_S, COMBO_END};
+const uint16_t PROGMEM showTerminalCB[] = {KC_COMM, KC_O, KC_Z, COMBO_END};
+const uint16_t PROGMEM starCB[] = {KC_COMM, KC_O, KC_V, COMBO_END};
+const uint16_t PROGMEM eqlCB[] = {KC_COMM, KC_O, KC_F, COMBO_END};
+const uint16_t PROGMEM plsCB[] = {KC_COMM, KC_O, KC_G, COMBO_END};
+const uint16_t PROGMEM onLowCB[] = {KC_DOT, KC_E, COMBO_END};
+const uint16_t PROGMEM onLowRCB[] = {KC_C, KC_T, COMBO_END};
 
 combo_t key_combos[COMBO_COUNT] = {
     [TK__LS_CB] = COMBO_ACTION(tk_ls),
     [KAPSLOCK] = COMBO_ACTION(kapslock),
-    [SFT_CB] = COMBO_ACTION(sftcb),
     [LPR_CB] = COMBO(lprcb, KC_LPRN),
     [RPR_CB] = COMBO(rprcb, KC_RPRN),
     [LBR_CB] = COMBO(lbrcb, KC_LBRC),
@@ -66,11 +74,16 @@ combo_t key_combos[COMBO_COUNT] = {
     [QUES_CB] = COMBO(questioncb, KC_QUES),
     [MINS_CB] = COMBO(minscb, KC_MINS),
     [UNDS_CB] = COMBO(undscb, KC_UNDS),
-    [LOWER_CB] = COMBO_ACTION(lowercb),
     [BASE_CB] = COMBO_ACTION(basecb),
     [VPASTE_CB] = COMBO_ACTION(vimPasteCB),
     [VYANK_CB] = COMBO_ACTION(vimYankCB),
-    [ALT_BACK_CB] = COMBO_ACTION(altBackCB),
+    [ALT_BACK_CB] = COMBO(altBackCB, A(KC_BSPC)),
+    [SHOW_TERMINAL_CB] = COMBO(showTerminalCB, KC_F12),
+    [STAR_CB] = COMBO(starCB, KC_ASTR),
+    [EQL_CB] = COMBO(eqlCB, KC_EQL),
+    [PLS_CB] = COMBO(plsCB, KC_PLUS),
+    [ONLOW_CB] = COMBO_ACTION(onLowCB),
+    [ONLOWR_CB] = COMBO_ACTION(onLowRCB),
 };
 
 static bool kpa_active = false;
@@ -93,6 +106,14 @@ void capOff(void) {
 
 void process_combo_event(uint16_t combo_index, bool pressed) {
   if (!pressed) {
+    switch (combo_index) {
+    case ONLOW_CB:
+      layer_off(_LOWER);
+      return;
+    case ONLOWR_CB:
+      layer_off(_LOWER);
+      return;
+    }
     return;
   }
   switch (combo_index) {
@@ -101,13 +122,6 @@ void process_combo_event(uint16_t combo_index, bool pressed) {
     break;
   case KAPSLOCK:
     capOn();
-    break;
-  case SFT_CB:
-    capOff();
-    set_oneshot_mods(MOD_BIT(KC_LSFT));
-    break;
-  case LOWER_CB:
-    layer_on(_LOWER);
     break;
   case BASE_CB:
     layer_off(_LOWER);
@@ -119,8 +133,14 @@ void process_combo_event(uint16_t combo_index, bool pressed) {
   case VYANK_CB:
     SEND_STRING("\"+y");
     break;
-  case ALT_BACK_CB:
-    tap_code16(LALT(KC_BSPC));
+  case ONLOW_CB:
+    layer_on(_LOWER);
     break;
+  case ONLOWR_CB:
+    layer_on(_LOWER);
+    break;
+  default:
+    return;
   }
+  return;
 }
