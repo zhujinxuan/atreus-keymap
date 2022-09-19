@@ -31,12 +31,12 @@ enum combos {
 
 const uint16_t PROGMEM tk_ls[] = {KC_O, KC_DOT, KC_R, KC_S, COMBO_END};
 const uint16_t PROGMEM kapslock[] = {KC_COMM, KC_DOT, KC_P, COMBO_END};
-const uint16_t PROGMEM lprcb[] = {KC_O, KC_U, KC_G, COMBO_END};
-const uint16_t PROGMEM rprcb[] = {KC_O, KC_U, KC_R, COMBO_END};
-const uint16_t PROGMEM lbrcb[] = {KC_O, KC_U, KC_H, COMBO_END};
-const uint16_t PROGMEM rbrcb[] = {KC_O, KC_U, KC_N, COMBO_END};
-const uint16_t PROGMEM lsrcb[] = {KC_O, KC_U, KC_L, COMBO_END};
-const uint16_t PROGMEM rsrcb[] = {KC_O, KC_U, KC_W, COMBO_END};
+const uint16_t PROGMEM lprcb[] = {KC_COMM, KC_O, KC_H, COMBO_END};
+const uint16_t PROGMEM rprcb[] = {KC_COMM, KC_O, KC_L, COMBO_END};
+const uint16_t PROGMEM lbrcb[] = {KC_COMM, KC_O, KC_T, COMBO_END};
+const uint16_t PROGMEM rbrcb[] = {KC_COMM, KC_O, KC_M, COMBO_END};
+const uint16_t PROGMEM lsrcb[] = {KC_COMM, KC_O, KC_N, COMBO_END};
+const uint16_t PROGMEM rsrcb[] = {KC_COMM, KC_O, KC_W, COMBO_END};
 const uint16_t PROGMEM tildcb[] = {KC_O, KC_U, KC_C, COMBO_END};
 const uint16_t PROGMEM grvcb[] = {KC_O, KC_U, KC_V, COMBO_END};
 const uint16_t PROGMEM bslashcb[] = {KC_O, KC_C, KC_N, COMBO_END};
