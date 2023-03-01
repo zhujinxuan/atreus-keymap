@@ -18,7 +18,6 @@
 
 #include "config_common.h"
 
-#define IGNORE_MOD_TAP_INTERRUPT_PER_KEY
 #define PERMISSIVE_HOLD_PER_KEY
 #define COMBO_COUNT 26
 #define COMBO_ALLOW_ACTION_KEYS
@@ -28,19 +27,19 @@
 
 #define VENDOR_ID 0x1209
 #define PRODUCT_ID 0x2303
+#ifndef DEVICE_VER
 #define DEVICE_VER 0x0000
-#define MANUFACTURER Keyboardio
-#define PRODUCT Atreus
+#endif
 
 /* key matrix size */
 #define MATRIX_ROWS 4
 #define MATRIX_COLS 12
 
 /* define if matrix has ghost */
-//#define MATRIX_HAS_GHOST
+// #define MATRIX_HAS_GHOST
 
 /* number of backlight levels */
-//#define BACKLIGHT_LEVELS 3
+// #define BACKLIGHT_LEVELS 3
 
 /* Set 0 if debouncing isn't needed */
 #define DEBOUNCE 5
@@ -77,14 +76,14 @@
  */
 
 /* disable debug print */
-//#define NO_DEBUG
+// #define NO_DEBUG
 
 /* disable print */
-//#define NO_PRINT
+// #define NO_PRINT
 
 /* disable action features */
-//#define NO_ACTION_LAYER
-//#define NO_ACTION_TAPPING
-//#define NO_ACTION_ONESHOT
-//#define NO_ACTION_MACRO
-//#define NO_ACTION_FUNCTION
+// #define NO_ACTION_LAYER
+// #define NO_ACTION_TAPPING
+// #define NO_ACTION_ONESHOT
+// #define NO_ACTION_MACRO
+// #define NO_ACTION_FUNCTION

@@ -30,13 +30,6 @@
     return false;
  }
 
- bool get_ignore_mod_tap_interrupt(uint16_t keycode, keyrecord_t *record) {
-    if (record->event.key.row == 3) {
-        return false;
-    }
-    return true;
- }
-
  /* void keyboard_post_init_user(void) { */
  /*     // Customise these values to desired behaviour */
  /*     debug_enable=true; */
@@ -56,13 +49,13 @@
     |------+------+------+------+------+------.,------+------+------+------+------+------|
     |  ;   |   Q  |   J  |   K  |   X  |      | |     |   B  |   L  |   M  |   W  |   Z  |
     |------+------+------+------+------+------| |-----+------+------+------+------+------|
-    |RESET |  CTL |  ALT |G/TAB | S/ESC|      | |     | S/SPC|C/ENT | SFT  | GUI  |Adjust|
+    |QK_RBT |  CTL |  ALT |G/TAB | S/ESC|      | |     | S/SPC|C/ENT | SFT  | GUI  |Adjust|
     `-----------------------------------------'`-----------------------------------------' */
   [_DVORAK] = LAYOUT(
     KC_QUOT, KC_COMM, KC_DOT,  KC_P,    KC_Y,                      KC_F,     KC_G,    KC_C,    KC_R,     KC_V,
     KC_A,    KC_O,    KC_E,    KC_U,    KC_I,                      KC_D,     KC_H,    KC_T,    KC_N,     KC_S,
     KC_SCLN, KC_Q,    KC_J,    KC_K,    KC_X, RAIGRV,  KC_BSPC,    KC_B,     KC_L,    KC_M,    KC_W,     KC_Z,
-    RESET  ,  OSMCTL,  OSMALT, GUI_T(KC_TAB), SFT_T(KC_ESC), TT(_LOWER), TT(_LOWER), SFT_T(KC_SPC),   CTL_T(KC_ENTER), OSMALT, OSMGUI,  OSMSFT
+    QK_RBT  ,  OSMCTL,  OSMALT, GUI_T(KC_TAB), SFT_T(KC_ESC), TT(_LOWER), TT(_LOWER), SFT_T(KC_SPC),   CTL_T(KC_ENTER), OSMALT, OSMGUI,  OSMSFT
   ),
 
   /* LOWER Layer
@@ -73,47 +66,47 @@
     |------+------+------+------+------+------.,------+------+------+------+------+------|
     |      |      | Down |      |      |      ||      |   +  |  1   |   2  |   3  | F12  |
     |------+------+------+------+------+------||------+------+------+------+------+------|
-    |      |      |      |      |      |      ||      | SFT  | GUI  |   .  |   0  |      |
+    |      |      |      |      |      |      ||      | SFT  | CTL  |  ALT |   GUI|      |
     `-----------------------------------------'`-----------------------------------------'*/
   [_LOWER] = LAYOUT(
     KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC,                   KC_EQL,  KC_7, KC_8, KC_9, KC_ASTR,
     KC_CIRC, KC_LEFT, KC_UP,   KC_RGHT, KC_AMPR,                   KC_0, KC_4, KC_5, KC_6, KC_BSPC,
     KC_COPY, KC_PASTE,KC_DOWN, KC_RPRN, KC_RBRC, KC_ASTR, KC_ASTR, KC_PLUS,  KC_1, KC_2, KC_3, KC_F12,
-    RESET  , _______, _______, OSMGUI, OSMSFT,  TT(_LOWER), TT(_LOWER), OSMSFT,OSMCTL,CTL_T(KC_DOT),KC_0, TO(_ADJUST)
+    QK_RBT  , _______, _______, OSMGUI, OSMSFT,  TT(_LOWER), TT(_LOWER), OSMSFT,OSMCTL, _______, _______, TO(_ADJUST)
   ),
 
   /* RAISE Layer
     ,----------------------------------.              ,----------------------------------.
-    |   1  |   2  |   3  |   4  |   5  |              |   6  |  F7  |  F8  |  F9  |   0  |
+    |      |      | MUTE |      |      |              |   6  |  F7  |  F8  |  F9  |   0  |
     |------+------+------+------+------|              |------+------+------+------+------|
     | CAPS |Bright|VOL + |      | Home |              | PgDn |  F4  |  F5  |  F6  | F11  |
     |------+------+------+------+------+------.,------+------+------+------+------+------|
-    |      | Dim  |VOL - | Right| End  |MacLck||      | PgUp |  F1  |  F2  |  F3  | F12  |
+    |      | Dim  |VOL - |      | End  |      ||      | PgUp |  F1  |  F2  |  F3  | F12  |
     |------+------+------+------+------+------||------+------+------+------+------+------|
     |      |      |      |      | Del  |      ||      | Ins  |      |      |  F0  |      |
     `-----------------------------------------'`-----------------------------------------'*/
   [_RAISE] = LAYOUT(
-    KC_1,    KC_2,    KC_MUTE,     T_DVORAK, _______,                   _______, KC_F7, KC_F8, KC_F9,_______,
-    KC_CAPS, KC_BRIU, KC__VOLUP,   T_LOWER, KC_HOME,                   KC_PGUP, KC_F4, KC_F5, KC_F6, KC_F11,
-    _______, KC_BRID, KC__VOLDOWN, T_RAISE, KC_END,  _______, _______, KC_PGDN, KC_F1, KC_F2, KC_F3, KC_F12,
-    RESET  , _______, _______,     _______, KC_DEL,  _______, _______, KC_INS,_______,_______,KC_F10,TO(_ADJUST)
+    _______, KC_2,    KC_MUTE, _______, _______,                   _______, KC_F7, KC_F8, KC_F9,_______,
+    KC_CAPS, KC_BRIU, KC_VOLU, _______, KC_HOME,                   KC_PGUP, KC_F4, KC_F5, KC_F6, KC_F11,
+    _______, KC_BRID, KC_VOLD, _______, KC_END,  _______, _______, KC_PGDN, KC_F1, KC_F2, KC_F3, KC_F12,
+    QK_RBT , _______, _______, _______, KC_DEL,  _______, _______, KC_INS,_______,_______,KC_F10,TO(_ADJUST)
   ),
 
   /* ADJUST Layer
     ,----------------------------------.              ,----------------------------------.
     |  F1  |  F2  |  F3  |  F4  |  F5  |              |  F6  |  F7  |  F8  |  F9  | F10  |
     |------+------+------+------+------|              |------+------+------+------+------|
-    |  F11 |      |      |      |      |              |      | PrSc | ScLk | Paus | F12  |
+    |DVORAK| RAISE| LOWER|      |      |              |      | PrSc | ScRL | Paus | F11  |
     |------+------+------+------+------+------.,------+------+------+------+------+------|
-    |      |QWERTY|COLEMK|DVORAK|DVORMC|      ||      |      |      |      |      |      |
+    |      |QWERTY|COLEMK|DVORAK|DVORMC|      ||      |      |      |      |      | F12  |
     |------+------+------+------+------+------||------+------+------+------+------+------|
-    |      |      |      |      |      |      ||      |      |      |      |      | RESET|
+    |      |      |      |      |      |      ||      |      |      |      |      |      |
     `-----------------------------------------'`-----------------------------------------'*/
   [_ADJUST] = LAYOUT(
-    T_LOWER, T_RAISE, _______, _______, _______,                     KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10 ,
-    KC_F11,  _______, _______, _______, _______,                   _______, KC_PSCR, KC_SLCK, KC_PAUS, KC_F12 ,
-    _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
-    RESET  , _______, _______, _______,T_DVORAK, _______, _______, _______, _______, _______, _______, _______
+    KC_F1,    KC_F2,   KC_F3,   KC_F4,   KC_F5,                    KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,
+    T_DVORAK, T_LOWER, T_RAISE, _______, _______,                   _______, KC_PSCR, KC_SCRL, KC_PAUS, KC_F11,
+    _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, KC_F12 ,
+    QK_RBT , _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
   ),
  };
 
