@@ -1,23 +1,23 @@
- /* Copyright 2020 Ian Sterling
-  *
-  * This program is free software: you can redistribute it and/or modify
-  * it under the terms of the GNU General Public License as published by
-  * the Free Software Foundation, either version 2 of the License, or
-  * (at your option) any later version.
-  *
-  * This program is distributed in the hope that it will be useful,
-  * but WITHOUT ANY WARRANTY; without even the implied warranty of
-  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-  * GNU General Public License for more details.
-  *
-  * You should have received a copy of the GNU General Public License
-  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
-  */
+/* Copyright 2020 Ian Sterling
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
- // This is the personal keymap of Ian Sterling (@xyverz). It is based on the
- // keymap by Chris Gerber (@gerbercj), with the addition of persistent layers
- // like the Planck and Preonic keyboards by Jack Humbert.
- // clang-format off
+// This is the personal keymap of Ian Sterling (@xyverz). It is based on the
+// keymap by Chris Gerber (@gerbercj), with the addition of persistent layers
+// like the Planck and Preonic keyboards by Jack Humbert.
+// clang-format off
 
  #include QMK_KEYBOARD_H
  #include "keycodes/dual.h"
@@ -49,13 +49,13 @@
     |------+------+------+------+------+------.,------+------+------+------+------+------|
     |  ;   |   Q  |   J  |   K  |   X  |      | |     |   B  |   L  |   M  |   W  |   Z  |
     |------+------+------+------+------+------| |-----+------+------+------+------+------|
-    |QK_RBT |  CTL |  ALT |G/TAB | S/ESC|      | |     | S/SPC|C/ENT | SFT  | GUI  |Adjust|
+    |QK_RBT |  CTL |  ALT |G/TAB | S/ESC|      | |     | S/SPC|C/ENT | ALT  | GUI  |Adjust|
     `-----------------------------------------'`-----------------------------------------' */
   [_DVORAK] = LAYOUT(
     KC_QUOT, KC_COMM, KC_DOT,  KC_P,    KC_Y,                      KC_F,     KC_G,    KC_C,    KC_R,     KC_V,
     KC_A,    KC_O,    KC_E,    KC_U,    KC_I,                      KC_D,     KC_H,    KC_T,    KC_N,     KC_S,
-    KC_SCLN, KC_Q,    KC_J,    KC_K,    KC_X, RAIGRV,  KC_BSPC,    KC_B,     KC_L,    KC_M,    KC_W,     KC_Z,
-    QK_RBT  ,  OSMCTL,  OSMALT, GUI_T(KC_TAB), SFT_T(KC_ESC), TT(_LOWER), TT(_LOWER), SFT_T(KC_SPC),   CTL_T(KC_ENTER), OSMALT, OSMGUI,  OSMSFT
+    KC_SCLN, KC_Q,    KC_J,    KC_K,    KC_X, TT(_RAISE),  TT(_RAISE),    KC_B,     KC_L,    KC_M,    KC_W,     KC_Z,
+    QK_RBT  ,OSMCTL,  OSMALT, GUI_T(KC_TAB), SFT_T(KC_ESC), TT(_LOWER), TT(_LOWER), SFT_T(KC_SPC),   CTL_T(KC_ENTER), OSMALT, OSMGUI,  OSMSFT
   ),
 
   /* LOWER Layer
@@ -64,20 +64,20 @@
     |------+------+------+------+------|              |------+------+------+------+------|
     |   ^  | Left |  UP  | Right|   &  |              |   0  |  4   |   5  |   6  | BKSP |
     |------+------+------+------+------+------.,------+------+------+------+------+------|
-    |      |      | Down |      |      |      ||      |   +  |  1   |   2  |   3  | F12  |
+    |   +  |  -   | Down |  *   |  /    |      ||      |   +  |  1   |   2  |   3  | F12  |
     |------+------+------+------+------+------||------+------+------+------+------+------|
     |      |      |      |      |      |      ||      | SFT  | CTL  |  ALT |   GUI|      |
     `-----------------------------------------'`-----------------------------------------'*/
   [_LOWER] = LAYOUT(
     KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC,                   KC_EQL,  KC_7, KC_8, KC_9, KC_ASTR,
     KC_CIRC, KC_LEFT, KC_UP,   KC_RGHT, KC_AMPR,                   KC_0, KC_4, KC_5, KC_6, KC_BSPC,
-    KC_COPY, KC_PASTE,KC_DOWN, KC_RPRN, KC_RBRC, KC_ASTR, KC_ASTR, KC_PLUS,  KC_1, KC_2, KC_3, KC_F12,
+    KC_PLUS, KC_PMNS,KC_DOWN,  KC_ASTR, KC_PSLS, KC_EQL, KC_ASTR, KC_PLUS,  KC_1, KC_2, KC_3, KC_F12,
     QK_RBT  , _______, _______, OSMGUI, OSMSFT,  TT(_LOWER), TT(_LOWER), OSMSFT,OSMCTL, _______, _______, TO(_ADJUST)
   ),
 
   /* RAISE Layer
     ,----------------------------------.              ,----------------------------------.
-    |      |      | MUTE |      |      |              |   6  |  F7  |  F8  |  F9  |   0  |
+    |      |      | MUTE |      |      |              |   6  |  F7  |  F8  |  F9  |  F10 |
     |------+------+------+------+------|              |------+------+------+------+------|
     | CAPS |Bright|VOL + |      | Home |              | PgDn |  F4  |  F5  |  F6  | F11  |
     |------+------+------+------+------+------.,------+------+------+------+------+------|
@@ -86,10 +86,10 @@
     |      |      |      |      | Del  |      ||      | Ins  |      |      |  F0  |      |
     `-----------------------------------------'`-----------------------------------------'*/
   [_RAISE] = LAYOUT(
-    _______, KC_2,    KC_MUTE, _______, _______,                   _______, KC_F7, KC_F8, KC_F9,_______,
+    _______, KC_2,    KC_MUTE, _______, _______,                   _______, KC_F7, KC_F8, KC_F9, KC_F10,
     KC_CAPS, KC_BRIU, KC_VOLU, _______, KC_HOME,                   KC_PGUP, KC_F4, KC_F5, KC_F6, KC_F11,
     _______, KC_BRID, KC_VOLD, _______, KC_END,  _______, _______, KC_PGDN, KC_F1, KC_F2, KC_F3, KC_F12,
-    QK_RBT , _______, _______, _______, KC_DEL,  _______, _______, KC_INS,_______,_______,KC_F10,TO(_ADJUST)
+    QK_RBT , _______, _______, _______, KC_DEL,  _______, _______, KC_INS,_______,_______,_______,TO(_ADJUST)
   ),
 
   /* ADJUST Layer

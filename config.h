@@ -16,8 +16,6 @@
 
 #pragma once
 
-#include "config_common.h"
-
 #define PERMISSIVE_HOLD_PER_KEY
 #define COMBO_COUNT 26
 #define COMBO_ALLOW_ACTION_KEYS
