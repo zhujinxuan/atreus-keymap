@@ -71,7 +71,7 @@
   [_LOWER] = LAYOUT(
     KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC,                   KC_EQL,  KC_7, KC_8, KC_9, KC_ASTR,
     KC_CIRC, KC_LEFT, KC_UP,   KC_RGHT, KC_AMPR,                   KC_0, KC_4, KC_5, KC_6, KC_BSPC,
-    KC_PLUS, KC_PMNS,KC_DOWN,  KC_ASTR, KC_PSLS, KC_EQL, KC_ASTR, KC_PLUS,  KC_1, KC_2, KC_3, KC_F12,
+    KC_PLUS, KC_PMNS,KC_DOWN,  KC_ASTR, KC_PSLS, KC_ASTR, KC_ASTR, KC_PLUS,  KC_1, KC_2, KC_3, KC_F12,
     QK_RBT  , _______, _______, OSMGUI, OSMSFT,  TT(_LOWER), TT(_LOWER), OSMSFT,OSMCTL, _______, _______, TO(_ADJUST)
   ),
 
